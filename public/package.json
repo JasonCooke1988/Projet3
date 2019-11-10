@@ -1,0 +1,23 @@
+{
+  "name": "projet3",
+  "description": "Projet 3 de Jason Cooke",
+  "keywords": [
+    "web",
+    "application",
+    "php",
+    "mvc"
+  ],
+  "license": "MIT",
+  "main": "index.php",
+  "homepage": "https://jasoncooke.net",
+  "repository": "github:jasoncooke1988/projet3",
+  "bugs": "https://github.com/jasoncooke1988/projet3/issues",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2"
+  },
+  "author": {
+    "name": "Jason Cooke",
+    "email": "jason.cooke@hotmail.fr",
+    "url": "https://jasoncooke.net"
+  }
+}
