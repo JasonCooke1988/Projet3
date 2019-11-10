@@ -8,12 +8,13 @@
 # config/db.sql
 
 # Fonts
-
+public/font/
 
 # Pictures
-
+public/img/
 
 # Frontend Dependencies
+public/node_modules/
 
 # PHP Dependencies
 vendor/

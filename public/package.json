@@ -12,7 +12,9 @@
   "homepage": "https://jasoncooke.net",
   "repository": "github:jasoncooke1988/projet3",
   "bugs": "https://github.com/jasoncooke1988/projet3/issues",
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2"
+  },
   "author": {
     "name": "Jason Cooke",
     "email": "jason.cooke@hotmail.fr",

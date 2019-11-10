@@ -1,8 +1,8 @@
 {
-  "name": "philippebeck/php-mvc",
-  "version": "0.2.1",
+  "name": "jasoncooke/projet3",
+  "version": "0.1.0",
   "type": "project",
-  "description": "Projet 3 de Jason Cooke",
+  "description": "Jason Cooke projet 3",
   "keywords": [
     "web",
     "application",
@@ -26,10 +26,10 @@
   },
   "require": {
     "php": "7.2",
-    "twig/twig": "^2.12.1",
-    "tracy/tracy": "^2.7"
+    "twig/twig": "^2.12.1"
   },
   "require-dev": {
+    "tracy/tracy": "^2.7"
   },
   "config": {
     "platform": {
