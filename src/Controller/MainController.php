@@ -29,7 +29,7 @@ abstract class MainController
             'debug' => true
         ));
         $this->twig->addExtension(new DebugExtension());
-        $this->twig->addExtension(new PhpMvcExtension());
+        //$this->twig->addExtension(new PhpMvcExtension());
     }
     /**
      * Returns the Page URL
