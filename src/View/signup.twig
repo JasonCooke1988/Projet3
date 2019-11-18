@@ -1,0 +1,56 @@
+{% extends 'layout/layout.twig' %}
+
+{% block subtitle %}Création de compte{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block main %}
+    <main id="signup">
+        <section>
+            <div>
+                <h2>Sign Up</h2>
+                <a href="">TEST</a>
+                <p>Please fill this form to create an account.</p>
+                <form action="{{ url('signedup') }}"method="post">
+                    <div>
+                        <label>Nom d'utilisateur</label>
+                        <input type="text" name="user_name" class="form-control" value="Votre nom d'utilisateur ici" minlength="1" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Mot de passe</label>
+                        <input type="password" name="password" class="form-control" value="" minlength="5" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Confirmer le mot de passe</label>
+                        <input type="password" name="cpassword" class="form-control" value="" minlength="5" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Votre nom</label>
+                        <input type="text" name="last_name" class="form-control" value="Votre nom de famille" minlength="1" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Votre prénom</label>
+                        <input type="text" name="first_name" class="form-control" value="Votre prénom" minlength="1" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Question secrète</label>
+                        <input type="text" name="secret_question" class="form-control" value="" minlength="1" maxlength="250">
+                    </div>
+                    <div>
+                        <label>Réponse secrète</label>
+                        <input type="text" name="secret_answer" class="form-control" value="" minlength="1" maxlength="250">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                    <div>
+                        <p>
+                            {{ signuperror }}
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

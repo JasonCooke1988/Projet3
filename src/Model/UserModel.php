@@ -5,4 +5,7 @@ namespace App\Model;
  * Manages User Data
  * @package App\Model
  */
-class UserModel extends MainModel {}
+class UserModel extends MainModel
+{
+
+}
