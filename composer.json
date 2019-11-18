@@ -26,8 +26,7 @@
   },
   "require": {
     "php": "7.2",
-    "twig/twig": "^2.12.1",
-    "ext-pdo": "*"
+    "twig/twig": "^2.12.1"
   },
   "require-dev": {
     "tracy/tracy": "^2.7"
