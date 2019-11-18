@@ -9,7 +9,7 @@ use Twig\Error\SyntaxError;
  * Manages the Homepage
  * @package App\Controller
  */
-class HomeController extends MainController
+class SignupController extends MainController
 {
     /**
      * Renders the View Home
@@ -20,8 +20,6 @@ class HomeController extends MainController
      */
     public function defaultMethod()
     {
-        $allUsers = ModelFactory::getModel('User')->listData();
-        return $this->render('home.twig', ['allUsers' => $allUsers]);
-
+        return $this->render('signup.twig');
     }
 }

@@ -20,7 +20,7 @@ abstract class MainController
     protected $twig = null;
     /**
      * MainController constructor
-     * Creates the Template Engine & adds its Extensions
+     * Creates the Template Engine & adds its Extensions (Debug and custom extension).
      */
     public function __construct()
     {

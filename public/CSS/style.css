@@ -1,0 +1,17 @@
+/* Add your custom style here */
+/*TODO : change background image.*/
+body {
+    /*background-image: url("../img/bg.jpg");*/
+    text-align: center;
+}
+
+main {
+    padding: 10px;
+    background-color: white;
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}

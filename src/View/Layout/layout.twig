@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--TODO : Make sure Fontawesome works
+Make sure style.css is pointing to the right directory-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"               content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"  content="IE=edge">
+
+    <title>{% block title %}{{ block('subtitle') }} - Réseaux GBAF{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Text+Me+One%7cCinzel:400,700,900%7cShare+Tech+Mono">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+{{ include('layout/navbar.twig') }}
+
+<header>
+    <h1>{{ block('title') }}</h1>
+</header>
+
+{% block main %}{% endblock %}
+
+{{ include('layout/footer.twig') }}
+
+</body>
+</html>
