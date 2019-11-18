@@ -1,61 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport"               content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible"  content="IE=edge">
+{% extends 'layout/layout.twig' %}
 
-    <title>{% block title %}Home{% endblock %}</title>
+{% block subtitle %}Accueil{% endblock %}
 
-    <link rel="canonical" href="{% block canonical %}https://GBAF.jasoncooke.net{% endblock %}">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+{% block description %}Page D'accueil réseaux GBAF{% endblock %}
 
-    <meta name="description"                content="{% block description %}Homepage of the GBAF Extranet{% endblock %}">
-    <meta name="author"                     content="Jason Cooke">
-    <meta name="copyright"                  content="MIT">
-
-    <meta property="og:type"        content="website">
-    <meta property="og:title"       content="{{ block('title') }}">
-    <meta property="og:url"         content="{{ block('canonical') }}">
-    <meta property="og:description" content="{{ block('description') }}">
-    <!--TODO : Background image-->
-    <meta property="og:image"       content="{% block image %}{% endblock %}">
-
-    <meta name="twitter:card"           content="summary">
-    <meta name="twitter:title"          content="{{ block('title') }}">
-    <meta name="twitter:site"           content="{{ block('canonical') }}">
-    <meta name="twitter:description"    content="{{ block('description') }}">
-    <meta name="twitter:image"          content="{{ block('image') }}">
-    <meta name="twitter:creator"        content="@cookejason3">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Text+Me+One%7cCinzel:400,700,900%7cShare+Tech+Mono">
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-<header>
-</header>
-
-<main>
-    <section>
-        <h2>Demonstration</h2>
-
-        <p>The example users are :</p>
-        <ul>
-            {% for user in allUsers %}
-                <li>
-                    {{ user.name }} <hr> {{ user.email }}
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-</main>
-
-<footer>
-
-</footer>
-</body>
-</html>
+{% block main %}
+    <main id="home">
+        <section>
+            <a href="{{ url("signup")}}">Cliquez ici pour créer un compte</a>
+        </section>
+    </main>
+{% endblock %}
