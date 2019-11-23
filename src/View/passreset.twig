@@ -1,0 +1,40 @@
+{% extends 'layout/layout.twig' %}
+
+{% block subtitle %}Création de compte{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block main %}
+    <main id="signin">
+        <section>
+                <div>
+                    <h2>Changez votre mot de passe</h2>
+                    <p>Renseignez la réponse à votre question secrete</p>
+                    <form action="{{ url('user!checkanswer') }}"method="post">
+                        <div>
+                            <label>Question secrète</label>
+                            <p> {{ secretQuestion }} </p>
+                        </div>
+                        <div>
+                            <label>Réponse secrète</label>
+                            <input type="text" name="secretAnswer" class="form-control" value="" minlength="1" maxlength="50">
+                        </div>
+                        <div>
+                            <label>Nouveau mot de passe</label>
+                            <input type="password" name="password" class="form-control" value="" minlength="1" maxlength="50">
+                        </div>
+                        <div>
+                            <label>Confirmer nouveau mot de passe</label>
+                            <input type="password" name="cpassword" class="form-control" value="" minlength="1" maxlength="50">
+                        </div>
+                        <p>{{ error }}</p>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-default" value="Reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

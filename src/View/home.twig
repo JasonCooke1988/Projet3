@@ -8,7 +8,9 @@
 {% block main %}
     <main id="home">
         <section>
-            <a href="{{ url("signup")}}">Cliquez ici pour créer un compte</a>
+            <p>Bravo {{ user_name }} vous est connecté!</p>
+            <p>Ton prénom est {{ first_name }} et ton nom de famille est {{ last_name }}</p>
+            <p>Vous pouvez vous déconnecter en <a href="{{ url('user!signoutaction') }}">cliquant ici</a></p>
         </section>
     </main>
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'layout/layout.twig' %}
+
+{% block subtitle %}Création de compte{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block main %}
+    <main id="signin">
+        <section>
+            <div>
+                <h2>Connexion au compte utilisateur</h2>
+                <form action="{{ url('user!signinaction') }}"method="post">
+                    <div>
+                        <label>Nom d'utilisateur</label>
+                        <input type="text" name="userName" class="form-control" value="Jason" minlength="1" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Mot de passe</label>
+                        <input type="password" name="password" class="form-control" value="testing" minlength="5" maxlength="50">
+                    </div>
+                    <div>
+                        <label>Confirmer le mot de passe</label>
+                        <input type="password" name="cpassword" class="form-control" value="testing" minlength="5" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                    <p> {{ error }}</p>
+                    <p> {{ alert }}</p>
+                </form>
+                <div>
+                    <form action="{{ url('user!questionGet') }}"method="post">
+                        <div>
+                            <label>Nom d'utilisateur</label>
+                            <input type="text" name="userName" class="form-control" value="Jason" minlength="1" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-default" value="Reset">
+                        </div>
+                    </form>
+                </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,5 +1,3 @@
--- WARNING : Don't forget to add the file name inside the .gitignore file when you add sensible data here (like passwords)
-
 -- For Development only ! (Depends on your online server architecture)
 DROP DATABASE IF EXISTS `projet3`;
 CREATE DATABASE `projet3` CHARACTER SET utf8;

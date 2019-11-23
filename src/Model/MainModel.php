@@ -17,6 +17,10 @@ abstract class MainModel
      * @var string
      */
     protected $table = null;
+    /*
+     * Variable to stock user POST values
+     */
+    protected $user = [];
     /**
      * Model constructor
      * Receives the Database Object & creates the Table Name
@@ -29,10 +33,7 @@ abstract class MainModel
         $this->table    = ucfirst(str_replace('Model', '', array_pop($model)));
     }
     /**
-     * Lists all Datas from the id or another key
-     * @param string $value
-     * @param string $key
-     * @return array|mixed
+     * Lists all Data from the id or another key
      */
     public function listData(string $value = null, string $key = null)
     {
