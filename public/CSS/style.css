@@ -1,8 +1,18 @@
-/* Add your custom style here */
+
 /*TODO : change background image.*/
+
+/*The app is designed mobile first
+Tablet and desktop breakpoints at the bottom*/
+
+nav > ul {
+    display: flex;
+    justify-content: space-between;
+}
 body {
     /*background-image: url("../img/bg.jpg");*/
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 main {
@@ -10,8 +20,79 @@ main {
     background-color: white;
 }
 
+h3 {
+    display: flex;
+    justify-content: left;
+}
+
 ul {
     display: flex;
     justify-content: space-evenly;
     list-style: none;
+}
+
+.fa-user-circle {
+    color: red;
+}
+
+.stretch {
+    width: 100%;
+}
+
+.partnerLogoList {
+
+}
+
+.partnerInfo {
+    margin-left: 15px;
+}
+.partnerList {
+    border: 2px solid black;
+}
+
+.partnerListElt {
+    position: relative;
+    display: flex;
+    margin: 10px;
+    border: 2px solid red;
+    align-items: center;
+}
+.readButton {
+    position: absolute;
+    bottom:0px;
+    right: 0px;
+}
+
+
+.partnerDescription {
+    white-space:pre-wrap;
+
+}
+
+/*Phone breakpoint*/
+@media (max-width: 599px) {
+}
+
+/*Tablet portrait up breakpoint*/
+@media (min-width: 600px) {
+}
+
+/*Desktop breakpoint*/
+@media (min-width: 1200px) {
+    .structure {
+        width: 75%;
+    }
+    .logo {
+        height: 118px;
+        width: 94.5px;
+    }
+
+    .banner {
+        width: 720px;
+        height: 146px;
+    }
+    .partnerLogoList{
+        width: 134px;
+        height: 59px;
+    }
 }

@@ -1,0 +1,80 @@
+
+{% extends 'layout/layout.twig' %}
+
+{% block main %}
+    <main id="partner">
+
+        <section class="partnerPresentation">
+
+            <img src="../img/{{ partner.partnerImage }}">
+            <h2>{{ partner.partnerName }}</h2>
+            <div class="partnerDescription">
+                {{ partner.partnerDescription }}
+            </div>
+
+        </section>
+
+        <section class="comments">
+
+            <!--TODO : Number of comments displayed-->
+
+            {% if newCommentBox == false %}
+            <div class="commentButton">
+                <form action="#" method="post" target="_self">
+                    <input type="submit"
+                           name=""
+                           value="Nouveau commentaire"
+                           formMethod="post"
+                           formAction="{{url('partner!withCommentBox',[partner.partnerName])}}">
+                </form>
+            </div>
+            {% endif %}
+
+            {% if voteState == false %}
+                <div class="voteButtons">
+                    <p> {{ voteCount.likeCount }} </p>
+                    <a href="{{ url('partner!voteLike',[partner.partnerName]) }}"><i class="far fa-thumbs-up" ></i></a>
+                    <p> {{ voteCount.dislikeCount }} </p>
+                    <a href="{{ url('partner!voteDislike',[partner.partnerName]) }}"><i class="far fa-thumbs-down"></i></a>
+                </div>
+            {% endif %}
+            {% if voteState == 'like' %}
+                <div class="voteButtons">
+                    <p> {{ voteCount.likeCount }} </p>
+                    <a><i class="fas fa-thumbs-up" ></i></a>
+                    <p> {{ voteCount.dislikeCount}} </p>
+                    <a href="{{ url('partner!voteDislike',[partner.partnerName]) }}"><i class="far fa-thumbs-down"></i></a>
+                </div>
+            {% endif %}
+            {% if voteState == 'dislike' %}
+                <div class="voteButtons">
+                    <p> {{ voteCount.likeCount }} </p>
+                    <a href="{{ url('partner!voteLike',[partner.partnerName]) }}"><i class="far fa-thumbs-up" ></i></a>
+                    <p> {{ voteCount.dislikeCount }} </p>
+                    <a><i class="fas fa-thumbs-down"></i></a>
+                </div>
+            {% endif %}
+
+            {% if newCommentBox %}
+                <div class="newComment">
+                    <form id="newComment" action="{{ url('partner!createComment',[partner.partnerName]) }}"method="post">
+                        <textarea rows="4" cols="50" name="post" form="newComment"></textarea>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-default" value="Reset">
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+
+            {% for comment in commentsList %}
+            <div class="comment">
+                <p> {{ comment.userID }} </p>
+                <p> {{ comment.dateAdd }} </p>
+                <p> {{ comment.post }} </p>
+            </div>
+            {% endfor %}
+
+        </section>
+    </main>
+{% endblock %}

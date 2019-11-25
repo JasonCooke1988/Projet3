@@ -54,15 +54,16 @@ class UserController extends MainController
         }
         return $data;
     }
+
     /*
-     * Stores $user variables in $_SESSION
+     * used for storeing $user variables in $_SESSION
      */
-    public function createSessionData()
+    public function createSessionData(array $user)
     {
         $data =[
-            'firstName' => $this->user['firstName'],
-            'lastName' => $this->user['lastName'],
-            'userName' => $this->user['userName']
+            'firstName' => $user['firstName'],
+            'lastName' => $user['lastName'],
+            'userName' => $user['userName']
         ];
         return $data;
     }
@@ -127,7 +128,7 @@ class UserController extends MainController
             if(ModelFactory::getModel('User')->checkPassword($this->user['userName'], $this->user['password'])) {
                 if($this->user['password'] == $this->user['cpassword']){
                     $this->user = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
-                    $_SESSION = $this->createSessionData();
+                    $_SESSION = $this->createSessionData($this->user);
                     $this->redirect('home', ['userName' => $_SESSION['userName'], 'firstName' => $_SESSION['firstName'], 'lastName' => $_SESSION['lastName']]);
                 } else {
                     return $this->render('signin.twig',['error' => $this->passwordMatchError]);
@@ -146,9 +147,8 @@ class UserController extends MainController
     public function signOutActionMethod()
     {
         session_destroy();
-        $this->redirect('home');
+        return $this->redirect('home');
     }
-
 
     /*=======================PASSWORD RESET=======================*/
     /*

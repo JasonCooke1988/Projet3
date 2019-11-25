@@ -1,0 +1,25 @@
+<header>
+    <nav>
+        <ul>
+            <div class="headerElt">
+                <li>
+                    <a href="{{ url('home') }}" title="Home">
+                        <img class="logo" src = "../img/GBAF.png">
+                    </a>
+                </li>
+            </div>
+            {% if pageData.userName !="" %}
+            <div class="headerElt">
+                <li>
+                    <a href="" title="Contact">
+                        <p><i class="fas fa-user-circle fa-2x"></i> {{ pageData.lastName }} {{ pageData.firstName }}</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('user!signOutAction') }}"><button type="button" style="font: bold 14px Arial;">Déconnexion</button></a>
+                </li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

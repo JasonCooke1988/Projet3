@@ -51,15 +51,4 @@ class UserModel extends MainModel
         $secretQuestion = array_values($data);
         return $secretQuestion[0];
     }
-
-    /*
-     * Changes password in the database
-     */
-    public function changePassword()
-    {
-        $set = null;
-        foreach ($data as $dataKey => $dataValue) {
-            $set .= $dataKey . ' = "' . $dataValue . '", ';
-        }
-    }
 }
