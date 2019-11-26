@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 use App\Model\Factory\ModelFactory;
-use App\Model\UserModel;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -9,9 +8,13 @@ use Twig\Error\SyntaxError;
 class UserController extends MainController
 {
     /*
+    * Variable used for stocking POST data
+    */
+    public $userName = "";
+
+    /*
      * Error variables
      */
-
     public $userNameError = "Veuillez renseigner un nom d'utilisateur valide.";
 
     public $sameUserNameError = "Un compte utilisateur avec ce nom existe déja, veuillez essayer un autre nom.";
@@ -29,15 +32,7 @@ class UserController extends MainController
     /*
      * Alert variables
      */
-
     public $signUpComplete = "Félications votre compte à été créer avec succés! Vous pouvez désormais vous connecter!";
-
-
-
-    /*
-    * Variable used for stocking POST data
-    */
-    public $user = [];
 
     /*
      * Stocks the user data of POST into $user
@@ -119,17 +114,19 @@ class UserController extends MainController
     }
 
     /*
-   *Checks password verification, store user name, first name & last name in $_SESSION
+   *Checks password verification, store user name, first name & last name in SESSION
    */
     public function signInActionMethod()
     {
         $this->user = $this->stockUserData();
-        if(ModelFactory::getModel('user')->readData($this->user['userName'], 'userName')) {
+
+        if(ModelFactory::getModel('user')->readData($this->user['userName'], 'userName') != false) {
             if(ModelFactory::getModel('User')->checkPassword($this->user['userName'], $this->user['password'])) {
                 if($this->user['password'] == $this->user['cpassword']){
-                    $this->user = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
-                    $_SESSION = $this->createSessionData($this->user);
-                    $this->redirect('home', ['userName' => $_SESSION['userName'], 'firstName' => $_SESSION['firstName'], 'lastName' => $_SESSION['lastName']]);
+                    $sessionData = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
+                    $_SESSION = $this->createSessionData($sessionData);
+
+                   $this->redirect('home', ['pageData' => $_SESSION]);
                 } else {
                     return $this->render('signin.twig',['error' => $this->passwordMatchError]);
                 }
@@ -147,7 +144,7 @@ class UserController extends MainController
     public function signOutActionMethod()
     {
         session_destroy();
-        return $this->redirect('home');
+        $this->redirect('home');
     }
 
     /*=======================PASSWORD RESET=======================*/
@@ -208,6 +205,64 @@ class UserController extends MainController
             return $this->render('passreset.twig',['error' => $this->passwordMatchError]);
         }
     }
+
+
+    /*=======================User Account Page=======================*/
+
+
+    /*
+     *Function that manages the different account modification given by post
+     * updates the SESSION data with the changed data
+     */
+    public function userDataChangeMethod()
+    {
+        $userData = $this->stockUserData();
+        $this->userName = $_SESSION['userName'];
+        switch($userData) {
+            case isset($userData['firstName']):
+                $updateAlert = "Votre prénom à été mis à jour.";
+                ModelFactory::getModel('user')->updateData($this->userName,['firstName' => $userData['firstName']],'userName');
+                $sessionData = ModelFactory::getModel('User')->getSessionData($this->userName);
+                $_SESSION = $this->createSessionData($sessionData);
+                return $this->render('user.twig',['pageData' => $_SESSION, 'firstNameAlert' => $updateAlert]);
+                break;
+            case isset($userData['lastName']):
+                $updateAlert = "Votre nom de famille à été mis à jour.";
+                ModelFactory::getModel('user')->updateData($this->userName,['lastName' => $userData['lastName']],'userName');
+                $sessionData = ModelFactory::getModel('User')->getSessionData($this->userName);
+                $_SESSION = $this->createSessionData($sessionData);
+                return $this->render('user.twig',['pageData' => $_SESSION, 'lastNameAlert' => $updateAlert]);
+                break;
+            case isset($userData['secretAnswer'], $userData['secretQuestion']):
+                $updateAlert = "Votre question et réponse secrète ont été mis à jour.";
+                ModelFactory::getModel('user')->updateData($this->userName,['secretQuestion' => $userData['secretQuestion'], 'secretAnswer' => $userData['secretAnswer']],'userName');
+                $sessionData = ModelFactory::getModel('User')->getSessionData($this->userName);
+                $_SESSION = $this->createSessionData($sessionData);
+                return $this->render('user.twig',['pageData' => $_SESSION, 'QAndAAlert' => $updateAlert]);
+                break;
+            case isset($userData['password']):
+                if($userData['password'] == $userData['cpassword']) {
+                    $updateAlert = "Votre mot de passe à étais mis à jour.";
+                    ModelFactory::getModel('user')->updateData($this->userName,['password' => $userData['hashedPassword']],'userName');
+                    $sessionData = ModelFactory::getModel('User')->getSessionData($this->userName);
+                    $_SESSION = $this->createSessionData($sessionData);
+                    return $this->render('user.twig',['pageData' => $_SESSION, 'passwordAlert' => $updateAlert]);
+                } else {
+                    var_dump('test');
+                    $updateAlert = "Les mot de passe saisie ne sont pas identiques. Veuillez réessayer.";
+                    return $this->render('user.twig',['pageData' => $_SESSION, 'passwordAlert' => $updateAlert]);
+                }
+                break;
+
+        }
+    }
+
+    public function userAccountPageMethod()
+    {
+        return $this->render('user.twig',['pageData' => $_SESSION]);
+    }
+
+    /*=======================Default Method=======================*/
 
     /*
      * Checks if there is any data in POST, try signing up

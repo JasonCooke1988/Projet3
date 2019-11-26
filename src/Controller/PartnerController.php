@@ -22,6 +22,9 @@ class PartnerController extends MainController
 
     public $partnerData = [];
 
+    public $alreadyCommented = 'Vous avez déja posté un commentaire pour ce partenaire.';
+
+
 
     /*
      * Gets the number of Likes and Dislikes for a partner
@@ -60,8 +63,10 @@ class PartnerController extends MainController
         ModelFactory::getModel('vote')->updateOrCreateVote($_SESSION['userName'],$this->partnerName,'dislike');
         return $this->defaultMethod();
     }
+
     /*
-     * Creates the comment in the database
+     * Creates the comment in the database, checks if a comment already
+     * by the current user relative to the current partner
      */
     public function createCommentMethod()
     {
@@ -78,9 +83,9 @@ class PartnerController extends MainController
     /*
      * Gets comments relative ot the partner name
      */
-    public function getComments(string $partnerName)
+    public function getAllComments(string $partnerName)
     {
-        return $commentsData = ModelFactory::getModel('Comment')->listData($partnerName, 'partnerID');
+        return ModelFactory::getModel('Comment')->listData($partnerName, 'partnerID');
     }
 
     /*
@@ -88,7 +93,7 @@ class PartnerController extends MainController
      */
     public function getPartner(string $partnerName)
     {
-        return $partnerData = ModelFactory::getModel('Partner')->readData($partnerName, 'partnerName');
+        return ModelFactory::getModel('Partner')->readData($partnerName, 'partnerName');
     }
 
     /*
@@ -113,21 +118,30 @@ class PartnerController extends MainController
      */
     public function withCommentBoxMethod()
     {
-        $this->newCommentBox = true;
-        return $this->defaultMethod();
+        $this->userName = $_SESSION['userName'];
+        $this->partnerName = $_GET[0];
+        if(ModelFactory::getModel('comment')->getComment($this->userName, $this->partnerName) == false) {
+            $this->newCommentBox = true;
+            return $this->defaultMethod();
+        } else {
+            return $this->defaultMethod($this->alreadyCommented);
+        }
     }
 
     /*
      * Renders the partner page without a comment box
+     * Accepts a paramater for error messages to be rendered with twig
      */
-    public function defaultMethod()
+    public function defaultMethod($error = null)
     {
+        $this->userName = $_SESSION['userName'];
         $this->partnerName = $_GET[0];
         $this->partnerData = $this->getPartner($this->partnerName);
-        $this->commentsList = $this->getComments($this->partnerName);
-        $this->voteState = $this->getVoteState($this->partnerName, $_SESSION['userName']);
+        $this->commentsList = $this->getAllComments($this->partnerName);
+        $this->voteState = $this->getVoteState($this->partnerName, $this->userName);
         $this->voteCount = $this->getVoteCount($this->partnerName);
         return $this->render('partner.twig', [
+            'error' => $error,
             'partner' => $this->partnerData,
             'pageData' => $_SESSION,
             'commentsList' => $this->commentsList,

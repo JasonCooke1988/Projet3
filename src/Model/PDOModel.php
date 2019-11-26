@@ -5,22 +5,19 @@ namespace App\Model;
 use PDO;
 
 /**
- * Class PDOModel
+ * PDOModel
  * Prepares Queries before execution & return
- * @package App\Model
  */
 class PDOModel
 {
     /**
      * PDO Connection
-     * @var PDO
      */
     private $pdo;
 
     /**
      * PDOModel constructor
      * Receive the PDO Connection & store it
-     * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
     {
@@ -29,39 +26,30 @@ class PDOModel
 
     /**
      * Returns a unique result from the Database
-     * @param string $query
-     * @param array $params
-     * @return mixed
      */
     public function getData(string $query, array $params = [])
     {
-        $PDOStatement = $this->pdo->prepare($query);
-        $PDOStatement->execute($params);
-        return $PDOStatement->fetch();
+        $PDOCall = $this->pdo->prepare($query);
+        $PDOCall->execute($params);
+        return $PDOCall->fetch();
     }
 
     /**
      * Returns many results from the Database
-     * @param string $query
-     * @param array $params
-     * @return array|mixed
      */
     public function getAllData(string $query, array $params = [])
     {
-        $PDOStatement = $this->pdo->prepare($query);
-        $PDOStatement->execute($params);
-        return $PDOStatement->fetchAll();
+        $PDOCall = $this->pdo->prepare($query);
+        $PDOCall->execute($params);
+        return $PDOCall->fetchAll();
     }
 
     /**
      * Executes an action to the Database
-     * @param string $query
-     * @param array $params
-     * @return bool|mixed
      */
     public function setData(string $query, array $params = [])
     {
-        $PDOStatement = $this->pdo->prepare($query);
-        return $PDOStatement->execute($params);
+        $PDOCall = $this->pdo->prepare($query);
+        return $PDOCall->execute($params);
     }
 }
