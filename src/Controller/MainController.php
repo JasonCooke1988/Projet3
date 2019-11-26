@@ -15,7 +15,7 @@ use Twig\Loader\FilesystemLoader;
 abstract class MainController
 {
     /**
-     * @var Environment|null
+     * Environment
      */
     protected $twig = null;
     /**
@@ -33,9 +33,6 @@ abstract class MainController
     }
     /**
      * Returns the Page URL
-     * @param string $page
-     * @param array $params
-     * @return string
      */
     public function url(string $page, array $params = [])
     {
@@ -44,8 +41,6 @@ abstract class MainController
     }
     /**
      * Redirects to another URL
-     * @param string $page
-     * @param array $params
      */
     public function redirect(string $page, array $params = [])
     {
@@ -54,12 +49,6 @@ abstract class MainController
     }
     /**
      * Renders the Views
-     * @param string $view
-     * @param array $params
-     * @return string
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function render(string $view, array $params = [])
     {

@@ -14,7 +14,7 @@ class Router
     /**
      * Default controller
      */
-    const DEFAULT_CONTROLLER = 'HomeController';
+    const DEFAULT_CONTROLLER = 'UserController';
     /**
      * Default method
      */
@@ -46,7 +46,7 @@ class Router
     {
         $access = filter_input(INPUT_GET, 'access');
         if (!isset($access)) {
-            $access = 'home';
+            $access = 'Home';
         }
         $access             = explode('!', $access);
         $this->controller   = $access[0];

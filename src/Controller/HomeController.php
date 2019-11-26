@@ -7,21 +7,26 @@ use Twig\Error\SyntaxError;
 /**
  * Class HomeController
  * Manages the Homepage
- * @package App\Controller
  */
 class HomeController extends MainController
 {
-    /**
-     * Renders the View Home
-     * @return string
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
-     */
+
     public function defaultMethod()
     {
-        $allUsers = ModelFactory::getModel('User')->listData();
-        return $this->render('home.twig', ['allUsers' => $allUsers]);
+        /*
+         * Arrival on home page : check if SESSION user name is set if it is render home page
+         * if not redirects to registration form
+         */
 
+        if (!empty($_SESSION['userName'])) {
+            $partnerController = new PartnerController();
+            $partnerData = $partnerController->getAllPartners();
+            return $this->render('home.twig', array(
+                'pageData' => $_SESSION,
+                'partnersList' => $partnerData,
+            ));
+        } else {
+            $this->redirect('User');
+        }
     }
 }

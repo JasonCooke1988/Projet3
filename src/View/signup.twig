@@ -5,16 +5,15 @@
 {% block description %}{% endblock %}
 
 {% block main %}
-    <main id="signup">
+    <main id="reg">
         <section>
             <div>
-                <h2>Sign Up</h2>
-                <a href="">TEST</a>
-                <p>Please fill this form to create an account.</p>
-                <form action="{{ url('signedup') }}"method="post">
+                <h2>Créez votre compte</h2>
+                <p>Veuillez remplir ce formulaire pour créer un compte.</p>
+                <form action="{{ url('user!signup') }}"method="post">
                     <div>
                         <label>Nom d'utilisateur</label>
-                        <input type="text" name="user_name" class="form-control" value="Votre nom d'utilisateur ici" minlength="1" maxlength="50">
+                        <input type="text" name="userName" class="form-control" value="Jason" minlength="1" maxlength="50">
                     </div>
                     <div>
                         <label>Mot de passe</label>
@@ -26,26 +25,29 @@
                     </div>
                     <div>
                         <label>Votre nom</label>
-                        <input type="text" name="last_name" class="form-control" value="Votre nom de famille" minlength="1" maxlength="50">
+                        <input type="text" name="lastName" class="form-control" value="Cooke" minlength="1" maxlength="50">
                     </div>
                     <div>
                         <label>Votre prénom</label>
-                        <input type="text" name="first_name" class="form-control" value="Votre prénom" minlength="1" maxlength="50">
+                        <input type="text" name="firstName" class="form-control" value="Jason" minlength="1" maxlength="50">
                     </div>
                     <div>
                         <label>Question secrète</label>
-                        <input type="text" name="secret_question" class="form-control" value="" minlength="1" maxlength="250">
+                        <input type="text" name="secretQuestion" class="form-control" value="Ta chienne ?" minlength="1" maxlength="250">
                     </div>
                     <div>
                         <label>Réponse secrète</label>
-                        <input type="text" name="secret_answer" class="form-control" value="" minlength="1" maxlength="250">
+                        <input type="text" name="secretAnswer" class="form-control" value="Stella" minlength="1" maxlength="250">
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <input type="reset" class="btn btn-default" value="Reset">
                     </div>
                     <div>
-                        <p>
+                        <p>Déja un compte ? <a href="{{ url('user!signin') }}">connectez-vous</a></p>
+                    </div>
+                    <div>
+                        <p style ='color:red;'>
                             {{ signuperror }}
                         </p>
                     </div>

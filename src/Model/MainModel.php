@@ -3,24 +3,24 @@ namespace App\Model;
 /**
  * Class MainModel
  * Creates Queries for CRUD
- * @package App\Model
  */
 abstract class MainModel
 {
     /**
      * Database
-     * @var PDOModel
      */
     protected $database = null;
     /**
      * Database Table
-     * @var string
      */
     protected $table = null;
+    /*
+     * Variable to stock user POST values
+     */
+    protected $user = [];
     /**
      * Model constructor
      * Receives the Database Object & creates the Table Name
-     * @param PDOModel $database
      */
     public function __construct(PDOModel $database)
     {
@@ -29,10 +29,7 @@ abstract class MainModel
         $this->table    = ucfirst(str_replace('Model', '', array_pop($model)));
     }
     /**
-     * Lists all Datas from the id or another key
-     * @param string $value
-     * @param string $key
-     * @return array|mixed
+     * Lists all Data from the id or another key
      */
     public function listData(string $value = null, string $key = null)
     {
@@ -45,7 +42,6 @@ abstract class MainModel
     }
     /**
      * Creates a new Data entry
-     * @param array $data
      */
     public function createData(array $data)
     {
@@ -56,9 +52,6 @@ abstract class MainModel
     }
     /**
      * Reads Data from its id or another key
-     * @param string $value
-     * @param string|null $key
-     * @return mixed
      */
     public function readData(string $value, string $key = null)
     {
@@ -71,9 +64,6 @@ abstract class MainModel
     }
     /**
      * Updates Data from its id or another key
-     * @param string $value
-     * @param array $data
-     * @param string|null $key
      */
     public function updateData(string $value, array $data, string $key = null)
     {
@@ -91,8 +81,6 @@ abstract class MainModel
     }
     /**
      * Deletes Data from its id or another key
-     * @param string $value
-     * @param string|null $key
      */
     public function deleteData(string $value, string $key = null)
     {

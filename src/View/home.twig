@@ -1,14 +1,30 @@
 
 {% extends 'layout/layout.twig' %}
 
-{% block subtitle %}Accueil{% endblock %}
-
-{% block description %}Page D'accueil réseaux GBAF{% endblock %}
-
 {% block main %}
     <main id="home">
-        <section>
-            <a href="{{ url("signup")}}">Cliquez ici pour créer un compte</a>
+        <section class="presentation">
+            <h1>Réseau extranet GBAF</h1>
+            <p>Le GBAF : représentant de la profession bancaire et des assureurs sur tous les axes de la réglementation financière française.</p>
+            <img class="banner" src = "../img/unity.png">
+        </section>
+        <section class="partners">
+            <h2>Nos acteurs et partenaires</h2>
+            <p>Voici une liste de tous les acteurs et partenaires du groupe GBAF.</p>
+            <div class="partnerList">
+                {% for partner in partnersList %}
+                    <div class="partnerListElt">
+                        <img class="partnerLogoList" src="../img/{{ partner.partnerImage }}">
+                        <div class="partnerInfo">
+                            <h3> {{ partner.partnerName }} </h3>
+                            <p> {{ partner.partnerShortDescr }} </p>
+                        </div>
+                        <div class="readButton">
+                            <a href="{{ url('partner',[partner.partnerName]) }}">Lire la suite...</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </section>
     </main>
 {% endblock %}
