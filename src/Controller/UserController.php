@@ -12,6 +12,8 @@ class UserController extends MainController
     */
     public $userName = "";
 
+    public $user = [];
+
     /*
      * Error variables
      */
@@ -122,19 +124,16 @@ class UserController extends MainController
 
         if(ModelFactory::getModel('user')->readData($this->user['userName'], 'userName') != false) {
             if(ModelFactory::getModel('User')->checkPassword($this->user['userName'], $this->user['password'])) {
-                if($this->user['password'] == $this->user['cpassword']){
-                    $sessionData = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
-                    $_SESSION = $this->createSessionData($sessionData);
-
-                   $this->redirect('home', ['pageData' => $_SESSION]);
-                } else {
-                    return $this->render('signin.twig',['error' => $this->passwordMatchError]);
-                }
+                $sessionData = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
+                $_SESSION = $this->createSessionData($sessionData);
+                $this->redirect('home', ['pageData' => $_SESSION]);
             } else {
-                return $this->render('signin.twig', ['error' => $this->passwordIncorrectError]);
+                $secretQuestion =  ModelFactory::getModel('User')->secretQuestionGet($this->userName);
+                return $this->render('signin.twig', ['error' => $this->passwordIncorrectError, 'secretQuestion' => $secretQuestion]);
             }
         } else {
-            return $this->render('signin.twig',['error' => $this->sameUserNameError]);
+            $secretQuestion =  ModelFactory::getModel('User')->secretQuestionGet($this->userName);
+            return $this->render('signin.twig',['error' => $this->sameUserNameError, 'secretQuestion' => $secretQuestion]);
         }
     }
 
@@ -166,10 +165,10 @@ class UserController extends MainController
     public function questionGetMethod()
     {
         $this->user = $this->stockUserData();
-        $_SESSION['namePasswordReset'] = $this->user['userName'];
-        $secretQuestion =  ModelFactory::getModel('User')->secretQuestionGet($_SESSION['namePasswordReset']);
-        if($secretQuestion != false) {
-            return $this->render('passreset.twig', ['userName' => $this->user['userName'], 'secretQuestion' => $secretQuestion]);
+        $_SESSION['tempUserName'] = $this->user['userName'];
+        $_SESSION['tempSecretQuestion'] =  ModelFactory::getModel('User')->secretQuestionGet($_SESSION['tempUserName']);
+        if($_SESSION['tempSecretQuestion'] != false) {
+            return $this->render('passreset.twig', ['userName' => $_SESSION['tempUserName'], 'secretQuestion' => $_SESSION['tempSecretQuestion']]);
         } else {
             return $this->render('signin.twig', ['passResetError' => $this->userNameError]);
         }
@@ -181,11 +180,12 @@ class UserController extends MainController
     public function checkAnswerMethod()
     {
         $this->user = $this->stockUserData();
-        $secretAnswerGet = ModelFactory::getModel('User')->secretAnswerGet($_SESSION['namePasswordReset']);
+        $secretAnswerGet = ModelFactory::getModel('User')->secretAnswerGet($_SESSION['tempUserName']);
         if ($secretAnswerGet == $this->user['secretAnswer']) {
+            unset($_SESSION['tempSecretQuestion']);
             return $this->newPasswordMethod();
         } else {
-            return $this->render('passreset.twig', ['error' => $this->answerError]);
+            return $this->render('passreset.twig', ['error' => $this->answerError, 'secretQuestion' =>$_SESSION['tempSecretQuestion']]);
         }
     }
 
@@ -198,8 +198,8 @@ class UserController extends MainController
     {
         $this->user = $this->stockUserData();
         if($this->user['password'] == $this->user['cpassword']) {
-            ModelFactory::getModel('User')->updateData($_SESSION['namePasswordReset'],['password' => $this->user['hashedPassword']], 'userName');
-            unset($_SESSION['namePasswordReset']);
+            ModelFactory::getModel('User')->updateData($_SESSION['tempUserName'],['password' => $this->user['hashedPassword']], 'userName');
+            unset($_SESSION['tempUserName']);
             return $this->render('signin.twig',['alert' => $this->newPasswordAlert]);
         } else {
             return $this->render('passreset.twig',['error' => $this->passwordMatchError]);
@@ -248,7 +248,6 @@ class UserController extends MainController
                     $_SESSION = $this->createSessionData($sessionData);
                     return $this->render('user.twig',['pageData' => $_SESSION, 'passwordAlert' => $updateAlert]);
                 } else {
-                    var_dump('test');
                     $updateAlert = "Les mot de passe saisie ne sont pas identiques. Veuillez réessayer.";
                     return $this->render('user.twig',['pageData' => $_SESSION, 'passwordAlert' => $updateAlert]);
                 }

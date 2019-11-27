@@ -1,7 +1,7 @@
 <header>
     <nav>
         <ul>
-            <div class="headerElt">
+            <div>
                 <li>
                     <a href="{{ url('home') }}" title="Home">
                         <img class="logo" src = "../img/GBAF.png">
@@ -9,14 +9,12 @@
                 </li>
             </div>
             {% if pageData.userName !="" %}
-            <div class="headerElt">
+            <div>
                 <li>
-                    <a href="" title="Contact">
-                        <a href="{{ url('user!userAccountPage') }}"><i class="fas fa-user-circle fa-2x"></i> {{ pageData.lastName }} {{ pageData.firstName }}</a>
-                    </a>
+                        <a href="{{ url('user!userAccountPage') }}" title="Paramètres utilisateur"><i class="fas fa-user-circle fa-2x"></i> {{ pageData.lastName }} {{ pageData.firstName }}</a>
                 </li>
-                <li>
-                    <a href="{{ url('user!signOutAction') }}"><button type="button" style="font: bold 14px Arial;">Déconnexion</button></a>
+                <li class="centerText">
+                    <a href="{{ url('user!signOutAction') }}"><button type="button">Déconnexion</button></a>
                 </li>
             </div>
             {% endif %}

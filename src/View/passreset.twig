@@ -13,23 +13,23 @@
                     <form action="{{ url('user!checkanswer') }}"method="post">
                         <div>
                             <label>Question secrète</label>
-                            <p> {{ secretQuestion }} </p>
+                            <p> {{ secretQuestion }} </p><br>
                         </div>
                         <div>
-                            <label>Réponse secrète</label>
+                            <label>Réponse secrète</label><br>
                             <input type="text" name="secretAnswer" class="form-control" value="" minlength="1" maxlength="50">
                         </div>
                         <div>
-                            <label>Nouveau mot de passe</label>
+                            <label>Nouveau mot de passe</label><br>
                             <input type="password" name="password" class="form-control" value="" minlength="1" maxlength="50">
                         </div>
                         <div>
-                            <label>Confirmer nouveau mot de passe</label>
+                            <label>Confirmer nouveau mot de passe</label><br>
                             <input type="password" name="cpassword" class="form-control" value="" minlength="1" maxlength="50">
                         </div>
                         <p>{{ error }}</p>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="submit" class="btn btn-primary" value="Confirmer">
                             <input type="reset" class="btn btn-default" value="Reset">
                         </div>
                     </form>
