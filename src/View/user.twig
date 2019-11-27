@@ -4,59 +4,60 @@
 
 
 {% block main %}
-    <div>
-        <label>Changez votre prénom :</label>
-        <form action="{{ url('user!userDataChange') }}" method="post">
-            <input type=""text name="firstName" class="form-control" value="" minlength="1" maxlength="50">
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-            <p style="color: red;">{{ firstNameAlert }}</p>
-        </form>
-        <hr>
-    </div>
+    <main>
+        <div>
+            <label>Changez votre prénom :</label>
+            <form action="{{ url('user!userDataChange') }}" method="post">
+                <input type="text" name="firstName" class="form-control" value="" minlength="1" maxlength="50">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+                <p style="color: red;">{{ firstNameAlert }}</p>
+            </form>
+            <hr>
+        </div>
 
-    <div>
-        <label>Changez votre nom de famille :</label>
-        <form action="{{ url('user!userDataChange') }}" method="post">
-            <input type=""text name="lastName" class="form-control" value="" minlength="1" maxlength="50">
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-            <p style="color: red;">{{ lastNameAlert }}</p>
-        </form>
-        <hr>
-    </div>
+        <div>
+            <label>Changez votre nom de famille :</label>
+            <form action="{{ url('user!userDataChange') }}" method="post">
+                <input type="text" name="lastName" class="form-control" value="" minlength="1" maxlength="50">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+                <p style="color: red;">{{ lastNameAlert }}</p>
+            </form>
+            <hr>
+        </div>
 
-    <div>
-        <label>Changez votre question et votre réponse secrète :</label>
-        <form action="{{ url('user!userDataChange') }}" method="post">
-            <input type="text" name="secretQuestion" class="form-control" value="" minlength="1" maxlength="50">
-            <input type="text" name="secretAnswer" class="form-control" value="" minlength="1" maxlength="50">
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-            <p style="color: red;">{{ QAndAAlert }}</p>
-        </form>
-        <hr>
-    </div>
+        <div>
+            <label>Changez votre question et votre réponse secrète :</label>
+            <form action="{{ url('user!userDataChange') }}" method="post">
+                <input type="text" name="secretQuestion" class="form-control" value="" minlength="1" maxlength="50">
+                <input type="text" name="secretAnswer" class="form-control" value="" minlength="1" maxlength="50">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+                <p style="color: red;">{{ QAndAAlert }}</p>
+            </form>
+            <hr>
+        </div>
 
-    <div>
-        <label>Changez votre mot de passe</label>
-        <form action="{{ url('user!userDataChange') }}"method="post">
-            <div>
-                <label>Nouveau mot de passe</label>
-                <input type="password" name="password" class="form-control" value="" minlength="1" maxlength="50">
-            </div>
-            <div>
-                <label>Confirmer nouveau mot de passe</label>
-                <input type="password" name="cpassword" class="form-control" value="" minlength="1" maxlength="50">
-            </div>
-            <p style="color: red;">{{ passwordAlert }}</p>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-        </form>
-    </div>
-
+        <div>
+            <label>Changez votre mot de passe</label>
+            <form action="{{ url('user!userDataChange') }}"method="post">
+                <div>
+                    <label>Nouveau mot de passe</label>
+                    <input type="password" name="password" class="form-control" value="" minlength="1" maxlength="50">
+                </div>
+                <div>
+                    <label>Confirmer nouveau mot de passe</label>
+                    <input type="password" name="cpassword" class="form-control" value="" minlength="1" maxlength="50">
+                </div>
+                <p style="color: red;">{{ passwordAlert }}</p>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </form>
+        </div>
+    </main>
 {% endblock %}

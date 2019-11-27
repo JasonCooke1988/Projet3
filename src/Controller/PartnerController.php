@@ -10,7 +10,11 @@ use Twig\Error\SyntaxError;
 class PartnerController extends MainController
 {
 
+    public $userName = "";
+
     public $newCommentBox = false;
+
+    public $commentCount = 0;
 
     public $commentsList = [];
 
@@ -22,8 +26,13 @@ class PartnerController extends MainController
 
     public $partnerData = [];
 
+    /*
+     * Error variables
+     */
     public $alreadyCommented = 'Vous avez déja posté un commentaire pour ce partenaire.';
 
+
+    /*=======================VOTES=======================*/
 
 
     /*
@@ -64,20 +73,29 @@ class PartnerController extends MainController
         return $this->defaultMethod();
     }
 
+    /*=======================COMMENTS=======================*/
+
     /*
-     * Creates the comment in the database, checks if a comment already
+     * Creates the comment in the database, checks if a comment already exists
      * by the current user relative to the current partner
      */
     public function createCommentMethod()
     {
         $this->partnerName = $_GET[0];
-        ModelFactory::getModel('comment')->createData([
-            'userID' => $_SESSION['userName'],
-            'partnerID' => $this->partnerName,
-            'dateAdd' => date("y/m/d"),
-            'post' => $_POST['post']
-        ]);
-        return $this->defaultMethod();
+        $this->userName = $_SESSION['userName'];
+        if(ModelFactory::getModel('comment')->getComment($this->userName, $this->partnerName) == false) {
+            $this->partnerName = $_GET[0];
+            ModelFactory::getModel('comment')->createData([
+                'userID' => $this->userName,
+                'partnerID' => $this->partnerName,
+                'dateAdd' => date("y/m/d"),
+                'post' => $_POST['post']
+            ]);
+            return $this->defaultMethod();
+        } else {
+            return $this->defaultMethod($this->alreadyCommented);
+        }
+
     }
 
     /*
@@ -85,15 +103,30 @@ class PartnerController extends MainController
      */
     public function getAllComments(string $partnerName)
     {
-        return ModelFactory::getModel('Comment')->listData($partnerName, 'partnerID');
+        return ModelFactory::getModel('comment')->listData($partnerName, 'partnerID');
     }
+
+    /*
+     * Gets the number of comments relative to the current partner
+     * Leaves comment count variable at 0 if false
+     */
+    public function getCommentCount(string $partnerName)
+    {
+        if($this->getAllComments($partnerName)!=false){
+            return count($this->getAllComments($partnerName));
+        } else {
+            return 0;
+        }
+    }
+
+    /*=======================PARTNERS=======================*/
 
     /*
      * Get one partner data to be rendered in its individual page
      */
     public function getPartner(string $partnerName)
     {
-        return ModelFactory::getModel('Partner')->readData($partnerName, 'partnerName');
+        return ModelFactory::getModel('partner')->readData($partnerName, 'partnerName');
     }
 
     /*
@@ -138,16 +171,18 @@ class PartnerController extends MainController
         $this->partnerName = $_GET[0];
         $this->partnerData = $this->getPartner($this->partnerName);
         $this->commentsList = $this->getAllComments($this->partnerName);
+        $this->commentCount = $this->getCommentCount($this->partnerName);
         $this->voteState = $this->getVoteState($this->partnerName, $this->userName);
         $this->voteCount = $this->getVoteCount($this->partnerName);
         return $this->render('partner.twig', [
             'error' => $error,
             'partner' => $this->partnerData,
             'pageData' => $_SESSION,
-            'commentsList' => $this->commentsList,
             'voteState' => $this->voteState,
+            'voteCount' => $this->voteCount,
             'newCommentBox' => $this->newCommentBox,
-            'voteCount' => $this->voteCount
+            'commentCount' => $this->commentCount,
+            'commentsList' => $this->commentsList
         ]);
     }
 }

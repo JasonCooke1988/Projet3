@@ -2,13 +2,14 @@
 {% extends 'layout/layout.twig' %}
 
 {% block main %}
-    <main id="home">
-        <section class="presentation">
+    <main class="center">
+        <section>
             <h1>Réseau extranet GBAF</h1>
-            <p>Le GBAF : représentant de la profession bancaire et des assureurs sur tous les axes de la réglementation financière française.</p>
-            <img class="banner" src = "../img/unity.png">
+            <p>Le Groupement Banque Assurance Français (GBAF) est une fédération représentant  les 6 grands groupes de la profession bancaire et des assureurs sur tous les axes de la réglementation financière française.</p>
+            <span class="center"><img alt="bannerImage" class="banner" src = "../img/banner.png"></span>
         </section>
-        <section class="partners">
+        <hr>
+        <section style="width: 100%;">
             <h2>Nos acteurs et partenaires</h2>
             <p>Voici une liste de tous les acteurs et partenaires du groupe GBAF.</p>
             <div class="partnerList">
@@ -20,7 +21,7 @@
                             <p> {{ partner.partnerShortDescr }} </p>
                         </div>
                         <div class="readButton">
-                            <a href="{{ url('partner',[partner.partnerName]) }}">Lire la suite...</a>
+                            <a href="{{ url('partner',[partner.partnerName]) }}"><button type="button">Lire la suite...</button></a>
                         </div>
                     </div>
                 {% endfor %}

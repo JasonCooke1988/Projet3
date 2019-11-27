@@ -1,23 +1,70 @@
-
-/*TODO : change background image.*/
-
 /*The app is designed mobile first
-Tablet and desktop breakpoints at the bottom*/
+Tablet and desktop breakpoints follow*/
 
-nav > ul {
-    display: flex;
-    justify-content: space-between;
+/*Styles used in all breakpoints */
+header {
+    border-bottom: 3px solid #DE7C5A;
 }
-body {
-    /*background-image: url("../img/bg.jpg");*/
+
+header > nav > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    padding: 0;
+}
+
+header > nav > ul > div > li {
+    margin-bottom: 15px;
+}
+
+footer {
+    height: 45px;
+    background-color: #DE7C5A;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
     display: flex;
     justify-content: center;
 }
 
+footer > ul {
+    margin: auto;
+}
+
+button {
+    font: bold 14px Arial;
+    width: 100px;
+    margin-right: 5px;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 main {
-    padding: 10px;
-    background-color: white;
+    margin-top: 35px;
+    margin-bottom: 80px;
+}
+
+.centerText {
+    text-align: center;
+}
+.error, .alert {
+    color: red;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 90%;
+    border: 3px solid #570000;
+
 }
 
 h3 {
@@ -35,17 +82,33 @@ ul {
     color: red;
 }
 
-.stretch {
+.signup{
+    display: flex;
+    flex-direction: column;
+}
+input[type="text"],[type="password"] {
     width: 100%;
 }
-
-.partnerLogoList {
-
+.banner {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+.logo {
+    width: 45%;
+}
+.partnerImage{
+    width: 95%;
+}
+.partnerLogoList{
+    width: 80%;
+    height: auto;
 }
 
 .partnerInfo {
     margin-left: 15px;
 }
+
 .partnerList {
     border: 2px solid black;
 }
@@ -53,46 +116,93 @@ ul {
 .partnerListElt {
     position: relative;
     display: flex;
+    flex-direction: column;
     margin: 10px;
+    padding-bottom: 30px;
     border: 2px solid red;
     align-items: center;
 }
+
 .readButton {
     position: absolute;
-    bottom:0px;
-    right: 0px;
+    bottom:0;
+    right: 0;
+}
+.commentInfo {
+    display: flex;
+    justify-content: space-between;
+}
+.flex {
+    display: flex;
 }
 
-
+a {
+    max-height: 3px;
+}
+.commentInfo > a p{
+    padding: 5px;
+}
+.comment > p {
+    margin : 0;
+}
+/*Formats the text from the database correctly on the page */
 .partnerDescription {
-    white-space:pre-wrap;
-
+    white-space: pre-wrap;
 }
 
-/*Phone breakpoint*/
-@media (max-width: 599px) {
+/*A class that gives a red border and a box shadow*/
+.borderAndShadow {
+    padding: 15px;
+    border: red solid 2px;
+    box-shadow: 5px 8px 8px #888888;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*A class for centering child elements */
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stretch {
+    width: 100%;
 }
 
 /*Tablet portrait up breakpoint*/
 @media (min-width: 600px) {
+    body {
+        font-size: 32px;
+    }
+    button {
+        font: bold 32px Arial;
+        width: 300px;
+        margin-right: 5px;
+    }
+    input {
+        font-size: 32px;
+    }
 }
 
 /*Desktop breakpoint*/
 @media (min-width: 1200px) {
-    .structure {
-        width: 75%;
+    header > nav > ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+    }
+    body {
+        font-size: 18px;
     }
     .logo {
         height: 118px;
         width: 94.5px;
     }
-
-    .banner {
-        width: 720px;
-        height: 146px;
+    input {
+        font-size: 18px;
     }
-    .partnerLogoList{
-        width: 134px;
-        height: 59px;
+    input[type="text"][type="password"]{
+        width: 100%;
     }
 }
