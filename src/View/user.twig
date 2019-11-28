@@ -1,8 +1,5 @@
 {% extends 'layout/layout.twig' %}
 
-{% block subtitle %}Paramètres compte utilisateur{% endblock %}
-
-
 {% block main %}
     <main>
         <div>
@@ -10,7 +7,7 @@
             <form action="{{ url('user!userDataChange') }}" method="post">
                 <input type="text" name="firstName" class="form-control" value="" minlength="1" maxlength="50">
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Confirmer">
                 </div>
                 <p style="color: red;">{{ firstNameAlert }}</p>
             </form>
@@ -22,7 +19,7 @@
             <form action="{{ url('user!userDataChange') }}" method="post">
                 <input type="text" name="lastName" class="form-control" value="" minlength="1" maxlength="50">
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Confirmer">
                 </div>
                 <p style="color: red;">{{ lastNameAlert }}</p>
             </form>
@@ -35,7 +32,7 @@
                 <input type="text" name="secretQuestion" class="form-control" value="" minlength="1" maxlength="50">
                 <input type="text" name="secretAnswer" class="form-control" value="" minlength="1" maxlength="50">
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Confirmer">
                 </div>
                 <p style="color: red;">{{ QAndAAlert }}</p>
             </form>
@@ -55,7 +52,7 @@
                 </div>
                 <p style="color: red;">{{ passwordAlert }}</p>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Confirmer">
                 </div>
             </form>
         </div>

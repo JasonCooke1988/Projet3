@@ -14,10 +14,6 @@ abstract class MainModel
      * Database Table
      */
     protected $table = null;
-    /*
-     * Variable to stock user POST values
-     */
-    protected $user = [];
     /**
      * Model constructor
      * Receives the Database Object & creates the Table Name

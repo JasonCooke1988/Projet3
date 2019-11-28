@@ -4,8 +4,6 @@ use App\Model\Factory\ModelFactory;
 
 /**
  * Class UserModel
- * Manages User Data
- * @package App\Model
  */
 class UserModel extends MainModel
 {

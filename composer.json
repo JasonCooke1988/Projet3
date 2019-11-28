@@ -1,6 +1,6 @@
 {
   "name": "jasoncooke/projet3",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "type": "project",
   "description": "Jason Cooke projet 3",
   "keywords": [
@@ -27,9 +27,6 @@
   "require": {
     "php": "7.2",
     "twig/twig": "^2.12.1"
-  },
-  "require-dev": {
-    "tracy/tracy": "^2.7"
   },
   "config": {
     "platform": {

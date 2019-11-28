@@ -1,11 +1,8 @@
 # Project Indexes of Jetbrains Apps
 .idea/
 
-# DB Connection Informations (uncomment when you start using the template)
-# config/db.php
-
-# DB Datas (uncomment when you start using the template)
-# config/db.sql
+# DB Connection Informations
+config/db.php
 
 # Fonts
 public/font/
