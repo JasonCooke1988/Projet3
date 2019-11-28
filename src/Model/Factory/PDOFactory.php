@@ -7,19 +7,16 @@ use PDO;
 /**
  * Class PDOFactory
  * Creates the Connection if it doesn't exist
- * @package App\Model
  */
 class PDOFactory
 {
     /**
      * Stores the Connection
-     * @var null
      */
     private static $pdo = null;
 
     /**
      * Returns the Connection if it exists or creates it before returning it
-     * @return PDO|null
      */
     public static function getPDO()
     {

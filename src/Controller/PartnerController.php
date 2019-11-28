@@ -3,9 +3,6 @@
 namespace App\Controller;
 use App\Model\Factory\ModelFactory;
 use App\Model\UserModel;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 class PartnerController extends MainController
 {

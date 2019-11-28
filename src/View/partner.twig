@@ -27,30 +27,30 @@
                     {% endif %}
 
                     {% if voteState == false %}
-                        <span class="flex">
-                        <p> {{ voteCount.likeCount }} </p>
+                        <div class="flex">
+                        <span class="likeButtons"> {{ voteCount.likeCount }} </span>
                         <a href="{{ url('partner!voteLike',[partner.partnerName]) }}"><i class="far fa-thumbs-up" ></i></a>
-                        <p> {{ voteCount.dislikeCount }} </p>
+                        <span class="likeButtons"> {{ voteCount.dislikeCount }} </span>
                         <a href="{{ url('partner!voteDislike',[partner.partnerName]) }}"><i class="far fa-thumbs-down"></i></a>
-                        </span>
+                        </div>
                     {% endif %}
 
                     {% if voteState == 'like' %}
-                        <span class="flex">
-                        <p> {{ voteCount.likeCount }} </p>
+                        <div class="flex">
+                        <span class="likeButtons"> {{ voteCount.likeCount }} </span>
                         <a><i class="fas fa-thumbs-up" ></i></a>
-                        <p> {{ voteCount.dislikeCount}} </p>
+                        <span class="likeButtons"> {{ voteCount.dislikeCount}} </span>
                         <a href="{{ url('partner!voteDislike',[partner.partnerName]) }}"><i class="far fa-thumbs-down"></i></a>
-                        </span>
+                        </div>
                     {% endif %}
 
                     {% if voteState == 'dislike' %}
-                        <span class="flex">
-                        <p> {{ voteCount.likeCount }} </p>
+                        <div class="flex">
+                        <span class="likeButtons"> {{ voteCount.likeCount }} </span>
                         <a href="{{ url('partner!voteLike',[partner.partnerName]) }}"><i class="far fa-thumbs-up" ></i></a>
-                        <p> {{ voteCount.dislikeCount }} </p>
+                        <span class="likeButtons"> {{ voteCount.dislikeCount }} </span>
                         <a><i class="fas fa-thumbs-down"></i></a>
-                        </span>
+                        </div>
                     {% endif %}
 
                     </div>

@@ -12,11 +12,11 @@
                     <form action="{{ url('user!signinaction') }}"method="post">
                         <div>
                             <label>Nom d'utilisateur</label><br>
-                            <input type="text" name="userName" class="form-control stretch" value="Jason" minlength="1" maxlength="50">
+                            <input type="text" name="userName" class="form-control stretch" value="" minlength="1" maxlength="50">
                         </div>
                         <div>
                             <label>Mot de passe</label><br>
-                            <input type="password" name="password" class="form-control stretch" value="testing" minlength="5" maxlength="50">
+                            <input type="password" name="password" class="form-control stretch" value="" minlength="5" maxlength="50">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Confirmer">
@@ -33,8 +33,8 @@
                     <p>Mot de passe oublié ? Renseignez votre nom d'utilisateur pour changer de mot de passe.</p>
                     <form action="{{ url('user!questionGet') }}"method="post">
                         <div>
-                            <label>Nom d'utilisateur</label>
-                            <input type="text" name="userName" class="form-control stretch" value="Jason" minlength="1" maxlength="50">
+                            <label for="userName">Nom d'utilisateur</label>
+                            <input id="userName" type="text" name="userName" class="form-control stretch" value="" minlength="1" maxlength="50">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Confirmer">
