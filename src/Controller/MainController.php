@@ -7,7 +7,6 @@ use Twig\Loader\FilesystemLoader;
 /**
  * Class MainController
  * Manages the Main Features
- * @package App\Controller
  */
 abstract class MainController
 {

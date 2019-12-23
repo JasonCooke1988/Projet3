@@ -45,7 +45,7 @@ class PartnerController extends MainController
      */
     public function getVoteState(string $userName, string $partnerName)
     {
-        $this->voteState = ModelFactory::getModel('Vote')->getVoteState($partnerName, $userName);
+        $this->voteState = ModelFactory::getModel('vote')->getVoteState($partnerName, $userName);
     }
 
     /*

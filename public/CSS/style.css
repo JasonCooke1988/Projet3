@@ -5,7 +5,9 @@ Tablet and desktop breakpoints follow*/
 header {
     border-bottom: 3px solid #DE7C5A;
 }
-
+a {
+    max-height: 3px;
+}
 header > nav > ul {
     display: flex;
     flex-direction: column;
@@ -51,20 +53,11 @@ main {
     margin-top: 35px;
     margin-bottom: 80px;
 }
-
-.centerText {
-    text-align: center;
-}
-.error, .alert {
-    color: red;
-}
-
 hr {
     margin-top: 20px;
     margin-bottom: 10px;
     width: 90%;
     border: 3px solid #570000;
-
 }
 
 h3 {
@@ -136,8 +129,11 @@ input[type="text"],[type="password"] {
     display: flex;
 }
 
-a {
-    max-height: 3px;
+.centerText {
+    text-align: center;
+}
+.error, .alert, .passResetError{
+    color: red;
 }
 .likeButtons {
     padding-left: 5px;
