@@ -79,7 +79,7 @@ class UserController extends MainController
              * Checks if user name doesnt already exist in database
              */
             if(!ModelFactory::getModel('user')->readData($this->user['userName'], 'userName')){
-                ModelFactory::getModel('User')->createData(
+                ModelFactory::getModel('user')->createData(
                     [
                         'userName' => $this->user['userName'],
                         'password' => $this->user['hashedPassword'],
@@ -120,7 +120,7 @@ class UserController extends MainController
         $this->user = $this->stockUserData();
 
         if(ModelFactory::getModel('user')->readData($this->user['userName'], 'userName') != false) {
-            if(ModelFactory::getModel('User')->checkPassword($this->user['userName'], $this->user['password'])) {
+            if(ModelFactory::getModel('user')->checkPassword($this->user['userName'], $this->user['password'])) {
                 $sessionData = ModelFactory::getModel('User')->getSessionData($this->user['userName']);
                 $_SESSION = $this->createSessionData($sessionData);
                 $this->redirect('home', ['pageData' => $_SESSION]);
@@ -129,8 +129,7 @@ class UserController extends MainController
                 return $this->render('signin.twig', ['error' => $this->passwordIncorrectError, 'secretQuestion' => $secretQuestion]);
             }
         } else {
-            $secretQuestion =  ModelFactory::getModel('User')->secretQuestionGet($this->userName);
-            return $this->render('signin.twig',['error' => $this->sameUserNameError, 'secretQuestion' => $secretQuestion]);
+            return $this->render('signin.twig',['error' => $this->userNameError]);
         }
     }
 
@@ -163,8 +162,8 @@ class UserController extends MainController
     {
         $this->user = $this->stockUserData();
         $_SESSION['tempUserName'] = $this->user['userName'];
-        $_SESSION['tempSecretQuestion'] =  ModelFactory::getModel('User')->secretQuestionGet($_SESSION['tempUserName']);
-        if($_SESSION['tempSecretQuestion'] != false) {
+        $_SESSION['tempSecretQuestion'] =  ModelFactory::getModel('user')->secretQuestionGet($_SESSION['tempUserName']);
+        if($_SESSION['tempSecretQuestion'] != null) {
             return $this->render('passreset.twig', ['userName' => $_SESSION['tempUserName'], 'secretQuestion' => $_SESSION['tempSecretQuestion']]);
         } else {
             return $this->render('signin.twig', ['passResetError' => $this->userNameError]);
@@ -177,9 +176,8 @@ class UserController extends MainController
     public function checkAnswerMethod()
     {
         $this->user = $this->stockUserData();
-        $secretAnswerGet = ModelFactory::getModel('User')->secretAnswerGet($_SESSION['tempUserName']);
+        $secretAnswerGet = ModelFactory::getModel('user')->secretAnswerGet($_SESSION['tempUserName']);
         if ($secretAnswerGet == $this->user['secretAnswer']) {
-            unset($_SESSION['tempSecretQuestion']);
             return $this->newPasswordMethod();
         } else {
             return $this->render('passreset.twig', ['error' => $this->answerError, 'secretQuestion' =>$_SESSION['tempSecretQuestion']]);
@@ -195,11 +193,11 @@ class UserController extends MainController
     {
         $this->user = $this->stockUserData();
         if($this->user['password'] == $this->user['cpassword']) {
-            ModelFactory::getModel('User')->updateData($_SESSION['tempUserName'],['password' => $this->user['hashedPassword']], 'userName');
+            ModelFactory::getModel('user')->updateData($_SESSION['tempUserName'],['password' => $this->user['hashedPassword']], 'userName');
             unset($_SESSION['tempUserName']);
             return $this->render('signin.twig',['alert' => $this->newPasswordAlert]);
         } else {
-            return $this->render('passreset.twig',['error' => $this->passwordMatchError]);
+            return $this->render('passreset.twig',['error' => $this->passwordMatchError, 'secretQuestion' => $_SESSION['tempSecretQuestion']]);
         }
     }
 

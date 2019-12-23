@@ -46,7 +46,9 @@ class UserModel extends MainModel
     {
         $query = 'SELECT secretQuestion FROM ' . $this->table . ' WHERE userName=?';
         $data = $this->database->getData($query,[$userName]);
-        $secretQuestion = array_values($data);
-        return $secretQuestion[0];
+        if($data != false) {
+            $secretQuestion = array_values($data);
+            return $secretQuestion[0];
+        }
     }
 }

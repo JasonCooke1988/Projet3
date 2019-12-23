@@ -22,7 +22,7 @@ abstract class MainModel
     {
         $this->database = $database;
         $model          = explode('\\', get_class($this));
-        $this->table    = ucfirst(str_replace('Model', '', array_pop($model)));
+        $this->table    = lcfirst(str_replace('Model', '', array_pop($model)));
     }
     /**
      * Lists all Data from the id or another key

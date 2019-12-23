@@ -11,7 +11,6 @@ class PhpMvcExtension extends AbstractExtension
 {
     /**
      * Adds functions to Twig Views
-     * @return array|TwigFunction[]
      */
     public function getFunctions()
     {
@@ -21,9 +20,6 @@ class PhpMvcExtension extends AbstractExtension
     }
     /**
      * Returns the Page URL
-     * @param string $page
-     * @param array $params
-     * @return string
      */
     public function url(string $page, array $params = [])
     {
