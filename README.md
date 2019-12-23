@@ -1,4 +1,5 @@
-# Projet3
-Repositoire pour mon projet 3 de Développeur Full Stack chez Open Classrooms.
+# GBAF-Extranet-PHP-MVC
 
-"Extranet du groupe bancaire GBAF"
+Extranet banking group application, second school project with OpenClassrooms. FullStack Developer course.
+
+Built using HTML5, CSS3, PHP, Composer Autoloader, MYSql and Twig.
