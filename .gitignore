@@ -2,7 +2,7 @@
 .idea/
 
 # DB Connection Informations
-config/db.php
+config/
 
 # Fonts
 public/font/
